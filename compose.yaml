@@ -1,0 +1,27 @@
+services:
+  pokecon:
+    container_name: pokecon
+    build:
+      context: ./pokemon_controller_pico
+      dockerfile: Dockerfile
+    image: pokecon_image
+    # ports:
+    #   - "15000:5000"
+    volumes:
+      - ./pokemon_controller_pico:/workspace
+    environment:
+      - DISPLAY=$DISPLAY
+      - WAYLAND_DISPLAY=$WAYLAND_DISPLAY
+      - XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR
+      - PULSE_SERVER=$PULSE_SERVER
+      # GPUを使うための設定
+      - NVIDIA_VISIBLE_DEVICES=all
+      - NVIDIA_DRIVER_CAPABILITIES=al
+    # GPUを使うための設定
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - capabilities:
+    #           - gpu
+    tty: true
